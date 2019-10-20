@@ -1,0 +1,12 @@
+{
+  "scripts": {
+    "test": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "redux": "^4.0.4",
+    "rxjs": "^6.5.3"
+  },
+  "devDependencies": {
+    "typescript": "^3.6.4"
+  }
+}
