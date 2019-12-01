@@ -1,5 +1,27 @@
 # Type Error when trying to convert from Redux store to observable using RxJS.from
 
+## RESOLVED
+
+### Cause
+
+This is a type definition of Redux issue and already fixed at GitHub master brunch.
+**But the fixed version hasn't been published to npm yet.**
+The changes would be published at next version after currently v4.0.4
+
+### Currently solution
+
+1. Copy `./node_modules/reduce-reducers/index.d.ts` to project
+2. Fix first argment type of `subscribe` method in `Observable` type to `unknown` from `Observer<T>`
+    it is [line 148](https://github.com/reduxjs/redux/blob/8aca937f695997e979bf8c0e03dbf22a2bf284dc/index.d.ts#L148) if v4.0.4
+    ```diff
+    -subscribe: (observer: Observer<T>) => { unsubscribe: Unsubscribe }
+    +subscribe: (observer: unknown) => { unsubscribe: Unsubscribe }
+    ```
+
+### The issue I posted
+
+reduxjs/redux#3586
+
 ## Code
 
 ```ts
@@ -32,7 +54,7 @@ index.ts:6:21 - error TS2345: Argument of type 'Store<unknown, Action<any>>' is 
 Found 1 error.
 ```
 
-# Versions
+## Versions
 
 ```
 redux: 4.0.4
